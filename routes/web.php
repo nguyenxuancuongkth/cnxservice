@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('index');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//-----------------
+Route::any('/', 'LoginController@index')->name('login');
+Route::any('register', 'RegisterController@index')->name('register');
