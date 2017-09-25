@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
-class RegisterController extends Controller
+class SignUpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('register');
+        //
     }
 
     /**
@@ -23,7 +25,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        return view('signup');
     }
 
     /**
@@ -34,7 +36,14 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $user = User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => bcrypt($input['password']),
+        ]);
+        Auth::loginUsingId($user->id);
+        return redirect()->route('home');
     }
 
     /**

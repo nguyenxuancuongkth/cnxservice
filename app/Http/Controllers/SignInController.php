@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class SignInController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('index');
+        //
     }
 
     /**
@@ -23,7 +24,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        //
+        return view('signin');
     }
 
     /**
@@ -80,5 +81,21 @@ class LoginController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * Handle an authentication attempt.
+     *
+     * @return Response
+     */
+    public function authenticate(Request $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('page.signin');
+        }
     }
 }

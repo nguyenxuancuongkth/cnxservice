@@ -11,14 +11,20 @@
 |
 */
 
-Route::get('/test', function () {
-    return view('index');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //-----------------
-Route::any('/', 'LoginController@index')->name('login');
-Route::any('register', 'RegisterController@index')->name('register');
+Route::get('signin', 'SignInController@create')->name('page.signin');
+Route::post('signin', 'SignInController@authenticate')->name('user.signin');
+Route::get('signup', 'SignUpController@create')->name('page.signup');
+Route::post('signup', 'SignUpController@store')->name('user.signup');
+
+
+
+
