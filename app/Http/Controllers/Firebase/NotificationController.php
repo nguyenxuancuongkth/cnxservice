@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Eloquent\Firebase\Notification;
 
+
 class NotificationController extends Controller
 {
     /**
@@ -15,7 +16,11 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        $device = Notification::paginate(15);
+        $response = array(
+            'devices' => $device
+        );
+        return view('notification.list', $response);
     }
 
     /**
@@ -23,9 +28,12 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $response = array(
+            'device_id' => $id
+        );
+        return view('notification.device.form', $response);
     }
 
     /**
@@ -38,14 +46,16 @@ class NotificationController extends Controller
     {
         // Validate the request...
         $notification = new Notification();
-        $notification->title = 'Portugal vs. Denmarks';
-        $notification->body = '5 to 10';
-        $notification->icon = 'firebase-logo.png';
-        $notification->url = 'http://localhost/curl/';
-        $notification->device_id = 13;
-//        $notification->group_id = '';
-//        $notification->topic_id = '';
+        $notification->name = $request->input('name', null);
+        $notification->title = $request->input('title', null);
+        $notification->body = $request->input('body', null);
+        $notification->icon = $request->input('icon', null);
+        $notification->url = $request->input('url', null);
+        $notification->device_id = $request->input('device_id', null);
+        $notification->group_id = $request->input('group_id', null);
+        $notification->topic_id = $request->input('topic_id', null);
         $notification->save();
+        return redirect()->route('notification.device.message.create', ['id' => $request->input('device_id', null)]);
     }
 
     /**

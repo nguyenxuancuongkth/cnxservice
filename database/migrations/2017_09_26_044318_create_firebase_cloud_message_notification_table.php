@@ -15,6 +15,7 @@ class CreateFirebaseCloudMessageNotificationTable extends Migration
     {
         Schema::create('firebase_cloud_message_notification', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->string('body')->nullable();
             $table->string('icon')->nullable();

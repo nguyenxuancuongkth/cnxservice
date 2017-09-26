@@ -221,7 +221,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Configuration</a></li>
+                        <li><a href="{{ route('notification.list') }}"><i class="fa fa-circle-o"></i>Notification List</a></li>
+                        <li><a href="{{ route('notification.device.list') }}"><i class="fa fa-circle-o"></i>Device List</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> Client</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> Topics</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> Groups</a></li>
@@ -390,26 +391,8 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Page Header
-                <small>Optional description</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content container-fluid">
-
-            <!--------------------------
-              | Your Page Content Here |
-              -------------------------->
-
-        </section>
+        <!-- Content -->
+        @yield('content')
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

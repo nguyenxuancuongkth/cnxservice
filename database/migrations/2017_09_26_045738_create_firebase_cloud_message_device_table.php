@@ -17,9 +17,9 @@ class CreateFirebaseCloudMessageDeviceTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('token_id')->nullable();
-            $table->string('user_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->integer('server_id')->nullable();
-            $table->integer('url')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
