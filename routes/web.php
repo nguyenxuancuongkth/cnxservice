@@ -27,7 +27,11 @@ Route::post('signup', 'SignUpController@store')->name('user.signup');
 
 Route::any('notification', 'NotificationController@test')->name('notification.test');
 Route::any('firebase', 'Firebase\CloudMessageController@send')->name('fi');
+Route::any('test', 'Firebase\CloudMessageController@sendMessageToSpecialDevice')->name('fi2');
 
 
-
+Route::prefix('firebase')->group(function () {
+    Route::any('device/store', 'Firebase\DeviceController@store')->name('firebase.device.store');
+    Route::any('server/store', 'Firebase\ServerController@store')->name('firebase.server.store');
+});
 

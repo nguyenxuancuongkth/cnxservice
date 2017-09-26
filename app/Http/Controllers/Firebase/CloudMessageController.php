@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Firebase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use App\Eloquent\Firebase\Device;
+use App\Eloquent\Firebase\Server;
 
 class CloudMessageController extends Controller
 {
@@ -30,9 +32,6 @@ class CloudMessageController extends Controller
      */
     public function __construct()
     {
-        $this->setServerKey();
-        $this->setDeviceToken();
-        $this->setDeviceURL();
         $this->setNotificationTitle();
         $this->setNotificationBody();
         $this->setNotificationIcon();
@@ -51,9 +50,9 @@ class CloudMessageController extends Controller
      * SET FIREBASE SERVER KEY TOKEN
      * @return void
      */
-    public function setServerKey()
+    public function setServerKey($serverKey)
     {
-        $this->serverKey = 'AAAATPcnxFw:APA91bHxurlWvn-cfZ_ubZMpIpOiTIv0rE4352DH96Ni21lN6v8w949o2UVHdzjg9WBp4nSlAD9cwJNxwhzKLsCbJSHCnlOA6r4HfkTBHaQM_Sc5Y9sSmJAkBw4hisESLNzFjsmE1HXu';
+        $this->serverKey = $serverKey;
     }
 
     /**
@@ -69,15 +68,15 @@ class CloudMessageController extends Controller
      * SET DEVICE REGISTRATION TOKEN
      * @return void
      */
-    public function setDeviceToken()
+    public function setDeviceToken($deviceToken)
     {
-        $this->deviceToken = 'cbBCYVxAWH8:APA91bFj1IjvS-aDiTYU1HHwKjBVAeTuC5M7b_wHj3bGmXC3KYYBkLFrMNaQBre8gItskWw9cUCH58a3vBkPo4LDcqFC0ckeWS3dKlcqfBFEbUXEQUiA3h7Fm_8K9fkOvoZ69SHyY63I';
+        $this->deviceToken = $deviceToken;
     }
     public function getDeviceURL() {
         return $this->deviceURL;
     }
-    public function setDeviceURL() {
-        $this->deviceURL = 'http://localhost:8081';
+    public function setDeviceURL($url) {
+        $this->deviceURL = $url;
     }
     public function getNotificationTitle() {
         return $this->notificationTitle;
@@ -97,9 +96,6 @@ class CloudMessageController extends Controller
     public function setNotificationIcon() {
         $this->notificationIcon = 'firebase-logo.png';
     }
-
-
-
     public function getFireBaseBodyRequest() {
         $message = array(
             'notification' => array(
@@ -129,9 +125,12 @@ class CloudMessageController extends Controller
         ]);
     }
 
-    public function test() {
-        echo '<pre>';
-        echo $this->getFireBaseBodyRequest();
-        echo '</pre>';
+    public function sendMessageToSpecialDevice() {
+        $id = 13;
+        $device = Device::findOrFail($id);
+        $this->setDeviceToken($device->token_id);
+        $this->setServerKey($device->server->serverKey);
+        $this->setDeviceURL($device->server->url);
+        $this->send();
     }
 }
