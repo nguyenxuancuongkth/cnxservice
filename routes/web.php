@@ -33,5 +33,6 @@ Route::any('test', 'Firebase\CloudMessageController@sendMessageToSpecialDevice')
 Route::prefix('firebase')->group(function () {
     Route::any('device/store', 'Firebase\DeviceController@store')->name('firebase.device.store');
     Route::any('server/store', 'Firebase\ServerController@store')->name('firebase.server.store');
+    Route::any('notification/store', 'Firebase\NotificationController@store')->name('firebase.notification.store');
 });
 
