@@ -25,6 +25,9 @@ Route::post('signin', 'SignInController@authenticate')->name('user.signin');
 Route::get('signup', 'SignUpController@create')->name('page.signup');
 Route::post('signup', 'SignUpController@store')->name('user.signup');
 
+Route::any('notification', 'NotificationController@test')->name('notification.test');
+Route::any('firebase', 'Firebase\CloudMessageController@send')->name('fi');
+
 
 
 
