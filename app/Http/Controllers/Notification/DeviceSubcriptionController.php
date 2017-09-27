@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Firebase;
+namespace App\Http\Controllers\Notification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Eloquent\Firebase\Device;
 
-class DeviceController extends Controller
+class DeviceSubcriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        $device = Device::paginate(15);
-        $response = array(
-            'devices' => $device
-        );
-        return view('notification.device.list', $response);
+        //
     }
 
     /**
@@ -40,13 +35,7 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request...
-        $device = new Device();
-        $device->name = 'device';
-        $device->token_id = 'cbBCYVxAWH8:APA91bFj1IjvS-aDiTYU1HHwKjBVAeTuC5M7b_wHj3bGmXC3KYYBkLFrMNaQBre8gItskWw9cUCH58a3vBkPo4LDcqFC0ckeWS3dKlcqfBFEbUXEQUiA3h7Fm_8K9fkOvoZ69SHyY63I';
-        $device->user_id = '1';
-        $device->server_id = '1';
-        $device->save();
+        //
     }
 
     /**

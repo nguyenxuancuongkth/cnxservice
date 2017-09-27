@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Firebase;
+namespace App\Http\Controllers\Notification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Eloquent\Firebase\Notification;
 
-
-class NotificationController extends Controller
+class FirebaseServerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $device = Notification::paginate(15);
-        $response = array(
-            'devices' => $device
-        );
-        return view('notification.list', $response);
+        //
     }
 
     /**
@@ -28,12 +22,9 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $response = array(
-            'device_id' => $id
-        );
-        return view('notification.device.form', $response);
+        //
     }
 
     /**
@@ -44,18 +35,7 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request...
-        $notification = new Notification();
-        $notification->name = $request->input('name', null);
-        $notification->title = $request->input('title', null);
-        $notification->body = $request->input('body', null);
-        $notification->icon = $request->input('icon', null);
-        $notification->url = $request->input('url', null);
-        $notification->device_id = $request->input('device_id', null);
-        $notification->group_id = $request->input('group_id', null);
-        $notification->topic_id = $request->input('topic_id', null);
-        $notification->save();
-        return redirect()->route('notification.device.message.create', ['id' => $request->input('device_id', null)]);
+        //
     }
 
     /**

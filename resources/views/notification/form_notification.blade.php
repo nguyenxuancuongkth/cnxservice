@@ -22,13 +22,9 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form method="POST" action="{{ route('notification.device.message.store') }}">
+                        <form method="POST" action="{{ route('notification.store') }}">
                         {{ csrf_field() }}
                         <!-- text input -->
-                            <div class="form-group">
-                                <label>Notification Name</label>
-                                <input name="name" value="Notification" type="text" class="form-control" placeholder="Notification Name">
-                            </div>
                             <div class="form-group">
                                 <label>Notification Title</label>
                                 <input name="title" value="Portugal vs. Denmarks" type="text" class="form-control" placeholder="Notification Title">
@@ -47,9 +43,19 @@
                                 <label>Notification Body</label>
                                 <textarea name="body" class="form-control" rows="3" placeholder="Notification Body">5 to 10</textarea>
                             </div>
+                            <div class="form-group">
+                                <label>Push notification:</label>
+                                <select name="time" class="form-control">
+                                    <option>Push Now</option>
+                                    <option>5 Minutes</option>
+                                    <option>10 Minutes</option>
+                                    <option>15 Minutes</option>
+                                    <option>20 Minutes</option>
+                                </select>
+                            </div>
                             <!-- /.box-body -->
                             <div class="">
-                                <a href="{{ route('notification.device.list') }}" class="btn btn-warning">Back</a>
+                                <a href="{{ route('notification.list') }}" class="btn btn-warning">Back</a>
                                 <button type="submit" class="btn btn-success pull-right">Create New Notification</button>
                             </div>
 
