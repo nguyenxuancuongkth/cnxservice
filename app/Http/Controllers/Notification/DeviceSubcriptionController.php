@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Notification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\DeviceSubcription;
 
 class DeviceSubcriptionController extends Controller
 {
@@ -14,7 +15,11 @@ class DeviceSubcriptionController extends Controller
      */
     public function index()
     {
-        //
+        $devices = DeviceSubcription::paginate(15);
+        $data = array(
+            'devices' => $devices
+        );
+        return view('notification.list_device_subcription', $data);
     }
 
     /**

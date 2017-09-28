@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>{{ $device->id }}</td>
                                     <td>
-                                        <a href="{!! route('notification.create',['id' => $device->id]) !!}" type="button" class="btn btn-success btn-flat">Create New Notification
+                                        <a href="{!! route('notification.message.create',['id' => $device->id]) !!}" type="button" class="btn btn-success btn-flat">Create New Notification
                                         </a>
                                     </td>
                                 </tr>

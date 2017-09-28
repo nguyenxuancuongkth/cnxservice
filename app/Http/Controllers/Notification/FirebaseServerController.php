@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Notification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\FirebaseServer;
 
 class FirebaseServerController extends Controller
 {
@@ -14,7 +15,7 @@ class FirebaseServerController extends Controller
      */
     public function index()
     {
-        //
+        return view('notification.list_firebase_server');
     }
 
     /**
@@ -24,7 +25,7 @@ class FirebaseServerController extends Controller
      */
     public function create()
     {
-        //
+        return view('notification.form_firebase_server');
     }
 
     /**
@@ -35,7 +36,17 @@ class FirebaseServerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request...
+        $server = new FirebaseServer();
+        $server->apiKey = $request->input('apiKey', null);
+        $server->authDomain = $request->input('authDomain', null);
+        $server->databaseURL = $request->input('databaseURL', null);
+        $server->projectId = $request->input('projectId', null);
+        $server->storageBucket = $request->input('storageBucket', null);
+        $server->messagingSenderId = $request->input('messagingSenderId', null);
+        $server->serverKey = $request->input('serverKey', null);
+        $server->save();
+        return redirect()->route('notification.firebase.server.list');
     }
 
     /**

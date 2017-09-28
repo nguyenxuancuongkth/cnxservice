@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Eloquent\Firebase;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Eloquent\Firebase\Device;
 use Illuminate\Notifications\Notifiable;
 
-class Server extends Model
+class FirebaseServer extends Model
 {
     use Notifiable;
     /**
@@ -14,7 +13,7 @@ class Server extends Model
      *
      * @var string
      */
-    protected $table = 'firebase_cloud_message_server';
+    protected $table = 'notification_firebase_server';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,11 +23,4 @@ class Server extends Model
         'apiKey', 'authDomain', 'databaseURL','projectId','storageBucket',
         'messagingSenderId','serverKey'
     ];
-    /**
-     * Get the device for the server.
-     */
-    public function devices()
-    {
-        return $this->hasMany('App\Eloquent\Firebase\Device');
-    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Notification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\NotificationMessage;
 
 class MessageController extends Controller
 {
@@ -22,9 +23,12 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $data = array(
+            'device_id' => $id
+        );
+        return view('notification.form_notification', $data);        
     }
 
     /**
@@ -35,7 +39,20 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $input = $request->all();
+
+        // dd($input);
+
+        // Validate the request...
+        $notification = new NotificationMessage();
+        $notification->title = $request->input('title', null);
+        $notification->body = $request->input('body', null);
+        $notification->icon = $request->input('icon', null);
+        $notification->url_action = $request->input('url_action', null);
+        $notification->device_id = $request->input('device_id', null);
+        $notification->push_time = $this->getFutureTime($request->input('push_time', 0));
+        $notification->save();
+        return redirect()->route('notification.device.subcription.list');
     }
 
     /**
@@ -81,5 +98,19 @@ class MessageController extends Controller
     public function destroy($id)
     {
         //
+    }
+    // Helper function
+    public function getFutureTime($minute) {
+        $now = time();
+        $futureTime = $now + ($minute * 60);
+        // $startDate = date('m-d-Y H:i:s', $now);
+        // $endDate = date('m-d-Y H:i:s', $futureTime);
+        return $futureTime;
+//        dd(Carbon::now()->timestamp);
+//        $time = Carbon::now();
+//        $a = $this->getEndsAtAttribute($time);
+//        echo $a;
+//        dd();        
+       
     }
 }

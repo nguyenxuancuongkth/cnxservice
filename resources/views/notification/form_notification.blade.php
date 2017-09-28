@@ -22,7 +22,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form method="POST" action="{{ route('notification.store') }}">
+                        <form method="POST" action="{{ route('notification.message.store') }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                             <div class="form-group">
@@ -31,12 +31,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Notification Link Action</label>
-                                <input name="url" value="http://localhost/curl/" type="text" class="form-control" placeholder="Notification Link Action">
+                                <input name="url_action" value="http://localhost/curl/" type="text" class="form-control" placeholder="Notification Link Action">
                                 <input name="icon" value="firebase-logo.png" type="hidden" class="form-control" placeholder="Notification Link Action">
                             </div>
                             <div class="form-group">
                                 <label>Current Device</label>
-                                <input name="device_id" type="text" class="form-control" value="{{ $device_id }}">
+                                <input name="device_id" type="text" readonly class="form-control" value="{{ $device_id }}">
                             </div>
                             <!-- textarea -->
                             <div class="form-group">
@@ -44,18 +44,11 @@
                                 <textarea name="body" class="form-control" rows="3" placeholder="Notification Body">5 to 10</textarea>
                             </div>
                             <div class="form-group">
-                                <label>Push notification:</label>
-                                <select name="time" class="form-control">
-                                    <option>Push Now</option>
-                                    <option>5 Minutes</option>
-                                    <option>10 Minutes</option>
-                                    <option>15 Minutes</option>
-                                    <option>20 Minutes</option>
-                                </select>
-                            </div>
+                                <label>Push notification after (Minute)</label>
+                                <input name="push_time" type="number" min="0" class="form-control" placeholder="Minute">
+                            </div>                            
                             <!-- /.box-body -->
                             <div class="">
-                                <a href="{{ route('notification.list') }}" class="btn btn-warning">Back</a>
                                 <button type="submit" class="btn btn-success pull-right">Create New Notification</button>
                             </div>
 

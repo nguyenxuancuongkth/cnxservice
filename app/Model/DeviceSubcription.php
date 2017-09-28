@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Eloquent\Firebase;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Notification extends Model
+class DeviceSubcription extends Model
 {
     use Notifiable;
     /**
@@ -13,21 +13,20 @@ class Notification extends Model
      *
      * @var string
      */
-    protected $table = 'firebase_cloud_message_notification';
+    protected $table = 'notification_device_subcription';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title', 'body', 'icon','url','device_id',
-        'group_id','topic_id'
+        'token', 'server_id', 'website_id'
     ];
     /**
      * Get the post that owns the comment.
      */
-    public function device()
+    public function server()
     {
-        return $this->belongsTo('App\Eloquent\Firebase\Device');
-    }
+        return $this->belongsTo('App\Model\FirebaseServer', 'server_id','id');
+    }      
 }

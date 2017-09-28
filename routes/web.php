@@ -65,9 +65,12 @@ Route::prefix('notification')->group(function () {
     // End
     // Message route
     Route::any('message/list', 'Notification\MessageController@index')->name('notification.message.list');
-    Route::any('message/create', 'Notification\MessageController@create')->name('notification.message.create');    
+    Route::any('message/create/{id}', 'Notification\MessageController@create')->name('notification.message.create');    
     Route::any('message/store', 'Notification\MessageController@store')->name('notification.message.store');    
-    Route::any('message/edit/{id}', 'Notification\MessageController@edit')->name('notification.message.edit')
-    Route::any('message/update/{id}', 'Notification\MessageController@update')->name('notification.message.update')
-    Route::any('message/destroy', 'Notification\MessageController@destroy')->name('notification.message.destroy')
+    Route::any('message/edit/{id}', 'Notification\MessageController@edit')->name('notification.message.edit');
+    Route::any('message/update/{id}', 'Notification\MessageController@update')->name('notification.message.update');
+    Route::any('message/destroy', 'Notification\MessageController@destroy')->name('notification.message.destroy');
+
+    // Push message
+    Route::any('message/push/{id}', 'Notification\PushMessageController@pushMessage')->name('notification.message.push');    
 });
