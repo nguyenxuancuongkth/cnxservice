@@ -47,5 +47,6 @@ class PushMessageController extends Controller
             ],
             'body' => $this->getBody($notification)
         ]);
-    }    
+    } 
+   
 }

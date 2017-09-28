@@ -73,4 +73,9 @@ Route::prefix('notification')->group(function () {
 
     // Push message
     Route::any('message/push/{id}', 'Notification\PushMessageController@pushMessage')->name('notification.message.push');    
+
+
+
 });
+    // Test 
+    Route::any('test', 'TestController@test'); 
